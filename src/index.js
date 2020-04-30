@@ -2,8 +2,9 @@ import FakeData from './fake-data';
 import render from './view/render';
 
 import ItemHeader from './view/components/header';
-import ItemButton, { ADD_ITEM } from './view/components/button';
 import ItemsFilter, { FILTER_ITEM } from './view/components/filter';
+import ItemCounter from './view/components/counter';
+import ItemButton, { ADD_ITEM } from './view/components/button';
 
 const state = {
   items: FakeData.getItems(),
@@ -11,9 +12,10 @@ const state = {
 
 let app = document.querySelector('#app');
 
-
 const renderNewState = newState => {
   window.requestAnimationFrame(() => {
+    document.querySelector('item-counter').items = newState.items;
+
     const cloneApp = render(app, newState);
     app.replaceWith(cloneApp);
     app = cloneApp;
@@ -36,4 +38,5 @@ renderNewState({ ...state });
 
 window.customElements.define('item-header', ItemHeader);
 window.customElements.define('item-filter', ItemsFilter);
+window.customElements.define('item-counter', ItemCounter);
 window.customElements.define('item-button', ItemButton);
