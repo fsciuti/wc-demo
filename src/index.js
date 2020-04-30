@@ -1,5 +1,7 @@
 import FakeData from './fake-data';
 
+import ComponentRegistry from './core/component-registry';
+
 import ItemHeader from './view/components/header';
 import ItemFilter, { FILTER_ITEM } from './view/components/filter';
 import ItemCounter from './view/components/counter';
@@ -31,8 +33,10 @@ document.querySelector('item-button').addEventListener(ADD_ITEM, () => {
   renderNewState({ ...state });
 });
 
-window.customElements.define('item-header', ItemHeader);
-window.customElements.define('item-filter', ItemFilter);
-window.customElements.define('item-counter', ItemCounter);
-window.customElements.define('item-list', ItemList);
-window.customElements.define('item-button', ItemButton);
+ComponentRegistry.register([
+  { tagName: 'item-header', component: ItemHeader },
+  { tagName: 'item-filter', component: ItemFilter },
+  { tagName: 'item-counter', component: ItemCounter },
+  { tagName: 'item-list', component: ItemList },
+  { tagName: 'item-button', component: ItemButton },
+]);
