@@ -1,6 +1,8 @@
 import FakeData from './fake-data';
 import render from './view/render';
+
 import ItemHeader from './view/components/header';
+import ItemButton, { ADD_ITEM } from './view/components/button';
 
 const state = {
   items: FakeData.getItems(),
@@ -24,7 +26,7 @@ document.querySelector('[data-component=item-filter]').addEventListener('input',
   renderNewState({ ...state, items: filteredItems });
 });
 
-document.querySelector('[data-component=item-add]').addEventListener('click', () => {
+document.querySelector('item-button').addEventListener(ADD_ITEM, () => {
   state.items.push(FakeData.getItem());
   renderNewState({ ...state });
 });
@@ -32,3 +34,4 @@ document.querySelector('[data-component=item-add]').addEventListener('click', ()
 renderNewState({ ...state });
 
 window.customElements.define('item-header', ItemHeader);
+window.customElements.define('item-button', ItemButton);
