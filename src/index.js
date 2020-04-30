@@ -3,6 +3,7 @@ import render from './view/render';
 
 import ItemHeader from './view/components/header';
 import ItemButton, { ADD_ITEM } from './view/components/button';
+import ItemsFilter, { FILTER_ITEM } from './view/components/filter';
 
 const state = {
   items: FakeData.getItems(),
@@ -19,9 +20,9 @@ const renderNewState = newState => {
   });
 };
 
-document.querySelector('[data-component=item-filter]').addEventListener('input', (evt) => {
+document.querySelector('item-filter').addEventListener(FILTER_ITEM, (evt) => {
   const filteredItems = state.items.filter((item) => {
-    return item.toLowerCase().indexOf(evt.target.value.toLowerCase()) >= 0;
+    return item.toLowerCase().indexOf(evt.detail.filter.toLowerCase()) >= 0;
   });
   renderNewState({ ...state, items: filteredItems });
 });
@@ -34,4 +35,5 @@ document.querySelector('item-button').addEventListener(ADD_ITEM, () => {
 renderNewState({ ...state });
 
 window.customElements.define('item-header', ItemHeader);
+window.customElements.define('item-filter', ItemsFilter);
 window.customElements.define('item-button', ItemButton);
