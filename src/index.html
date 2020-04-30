@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container mt-3">
+      <h1><%= htmlWebpackPlugin.options.title %></h1>
+      <input class="form-control" data-component="item-filter"/>
+      <div id="app">
+        <hr>
+        <p class="alert alert-primary" data-component="item-counter"></p>
+        <hr>
+        <ul class="list-group" data-component="item-list"></ul>
+        <hr>
+      </div>
+      <button class="btn btn-primary" data-component="item-add">Aggiungi</button>
+    </div>
+  </body>
+</html>
