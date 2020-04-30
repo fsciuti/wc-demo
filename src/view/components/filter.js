@@ -1,6 +1,6 @@
 export const FILTER_ITEM = 'FILTER_ITEM';
 
-export default class ItemsFilter extends HTMLElement {
+export default class ItemFilter extends HTMLElement {
   constructor() {
     super();
     this.input = document.createElement('input');
