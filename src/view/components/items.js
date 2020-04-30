@@ -1,18 +1,35 @@
-const createItem = (item) => {
-  const li = document.createElement('li');
-  li.textContent = item;
-  li.className = 'list-group-item';
-  return li;
-};
+export default class ItemList extends HTMLElement {
+  static get observedAttributes() {
+    return ['items'];
+  }
 
-const createItemList = (target, { items = [] }) => {
-  const cloneTarget = target.cloneNode(false);
+  constructor() {
+    super();
+    this.ul = document.createElement('ul');
+    this.ul.className = 'item-list list-group';
+    this.appendChild(this.ul);
+  }
 
-  items.forEach((item) => {
-    cloneTarget.appendChild(createItem(item));
-  });
+  get items() {
+    if (!this.hasAttribute('items')) {
+      return [];
+    }
 
-  return cloneTarget;
-};
+    return JSON.parse(this.getAttribute('items'));
+  }
 
-export { createItem, createItemList };
+  set items(value) {
+    this.setAttribute('items', JSON.stringify(value));
+  }
+
+  attributeChangedCallback() {
+    const items = this.items.reduce((str, item) => {
+      return `
+        ${str}
+        <li class="list-group-item">
+          ${item}
+        </li>`;
+    }, '');
+    this.querySelector('ul').innerHTML = items;
+  }
+}
