@@ -1,5 +1,6 @@
 import FakeData from './fake-data';
 import render from './view/render';
+import ItemHeader from './view/components/header';
 
 const state = {
   items: FakeData.getItems(),
@@ -29,3 +30,5 @@ document.querySelector('[data-component=item-add]').addEventListener('click', ()
 });
 
 renderNewState({ ...state });
+
+window.customElements.define('item-header', ItemHeader);
