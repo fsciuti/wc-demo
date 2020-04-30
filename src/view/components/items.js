@@ -5,9 +5,23 @@ export default class ItemList extends HTMLElement {
 
   constructor() {
     super();
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    shadowRoot.innerHTML = `
+    <style>
+      li:first-child {
+        border-top-left-radius: var(--item-list-radius, .25rem);
+        border-top-right-radius: var(--item-list-radius, .25rem);
+      }
+      li:last-child {
+        margin-bottom: 0;
+        border-bottom-right-radius: var(--item-list-radius, .25rem);
+        border-bottom-left-radius: var(--item-list-radius, .25rem);
+      }
+    </style>`;
     this.ul = document.createElement('ul');
+    this.ul.setAttribute('part', 'list');
     this.ul.className = 'item-list list-group';
-    this.appendChild(this.ul);
+    shadowRoot.appendChild(this.ul);
   }
 
   get items() {
@@ -26,10 +40,10 @@ export default class ItemList extends HTMLElement {
     const items = this.items.reduce((str, item) => {
       return `
         ${str}
-        <li class="list-group-item">
+        <li part="list-item">
           ${item}
         </li>`;
     }, '');
-    this.querySelector('ul').innerHTML = items;
+    this.shadowRoot.querySelector('ul').innerHTML = items;
   }
 }
