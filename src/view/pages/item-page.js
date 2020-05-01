@@ -14,7 +14,9 @@ const template = `
   <hr>
   <item-counter></item-counter>
   <hr>
-  <item-list></item-list>
+  <item-list>
+    <p slot="beforeBox" class="alert alert-warning">Before Text from LightDOM</p>
+  </item-list>
   <hr>
   <item-button></item-button>
 `;
