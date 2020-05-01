@@ -1,5 +1,6 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const path = require('path');
 
@@ -23,6 +24,13 @@ module.exports = {
       title: 'WC-Demo Project',
       template: './src/index.html',
     }),
+    new CopyWebpackPlugin([
+        {
+          context: 'node_modules/@webcomponents/webcomponentsjs',
+          from: '**/*.js',
+          to: 'polyfills'
+      }
+    ])
   ],
   output: {
     filename: 'bundle.js',
